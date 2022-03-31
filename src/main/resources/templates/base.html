@@ -83,7 +83,7 @@
 		<div class="row">
 			<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 				<div class="logo-area">
-					<a href="#"><img src="img/logo/logo.png" alt="" /></a>
+					<a href="/"><img src="img/logo/logo.png" alt="" /></a>
 				</div>
 			</div>
 		</div>
@@ -101,16 +101,16 @@
 								<li><a data-toggle="collapse" data-target="#Charts"
 									href="#">Usuários</a>
 									<ul class="collapse dropdown-header-top">
-										<li><a href="">Todos usuários</a></li>
-										<li><a href="">Adicionar novo usuário</a></li>
+										<li><a href="/">Todos usuários</a></li>
+										<li><a href="/view-users">Adicionar novo usuário</a></li>
 									</ul></li>
-								<li><a data-toggle="collapse" data-target="#demoevent"
-									href="#">Endereço</a>
-									<ul id="demoevent" class="collapse dropdown-header-top">
-										<li><a href="inbox.html">Inbox</a></li>
-										<li><a href="view-email.html">View Email</a></li>
-										<li><a href="compose-email.html">Compose Email</a></li>
-									</ul></li>
+<!-- 								<li><a data-toggle="collapse" data-target="#demoevent" -->
+<!-- 									href="#">Endereço</a> -->
+<!-- 									<ul id="demoevent" class="collapse dropdown-header-top"> -->
+<!-- 										<li><a href="inbox.html">Inbox</a></li> -->
+<!-- 										<li><a href="view-email.html">View Email</a></li> -->
+<!-- 										<li><a href="compose-email.html">Compose Email</a></li> -->
+<!-- 									</ul></li> -->
 								<li><a data-toggle="collapse" data-target="#democrou"
 									href="#">Vacina</a>
 									<ul id="democrou" class="collapse dropdown-header-top">
@@ -159,10 +159,10 @@
 			<div class="row">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
-						<li class="active"><a data-toggle="tab" href="#Home"><i
+						<li class="active"><a data-toggle="tab" href=""><i
 								class="notika-icon notika-house"></i> Usuário</a></li>
-						<li><a data-toggle="tab" href="#mailbox"><i
-								class="notika-icon notika-mail"></i> Endereço</a></li>
+<!-- 						<li><a data-toggle="tab" href="#mailbox"><i -->
+<!-- 								class="notika-icon notika-mail"></i> Endereço</a></li> -->
 						<li><a data-toggle="tab" href="#Interface"><i
 								class="notika-icon notika-edit"></i> Vacina</a></li>
 					</ul>
@@ -170,8 +170,8 @@
 						<div id="Home"
 							class="tab-pane in active notika-tab-menu-bg animated flipInX">
 							<ul class="notika-main-menu-dropdown">
-									<li><a href="">Todos usuários</a></li>
-									<li><a href="">Adicionar novo usuário</a></li>
+									<li><a href="/">Todos usuários</a></li>
+									<li><a a th:href="@{/form-user}" >Adicionar novo usuário</a></li>
 							</ul>
 						</div>
 						<div id="mailbox"

@@ -84,7 +84,7 @@
                         <div class="table-responsive">
                             <table id="data-table-basic" class="table table-striped">
                                 <thead>
-                                    <tr>
+                                    <tr >
                                         <th>Nome</th>
                                         <th>Endereço</th>
                                         <th>Telefone</th>
@@ -96,21 +96,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>QNP 14 Conj Ceilândia - DF</td>
-                                        <td>61 3333-3361</td>
-                                        <!-- <td>61 99999-9999</td> -->
-                                        <td>A+</td>
-                                        <td>Desenvolvedor</td>
+                                    <tr th:each="user : ${users}"  >
+                                        <td th:text="${user.name}">Tiger Nixon</td>
+                                        <td th:text="${user.concatenarEndereco}" >QNP 14 Conj Ceilândia - DF</td>
+                                        <td th:text="${user.telefone}" >61 3333-3361</td>
+                                        <!-- <td th:text="${user.celular}" >61 99999-9999</td> -->
+                                        <td th:text="${user.tipoSanguinio.descricao}" >A+</td>
+                                        <td th:text="${user.profissao}" >Desenvolvedor</td>
                                         <td>
-                                            <ui><label><input type="checkbox" checked="false" class="i-checks" disabled> <i></i>1ª</label></ui>
-                                            <ui><label><input type="checkbox" checked="" class="i-checks" disabled> <i></i>2ª</label></ui>
-                                            <ui><label><input type="checkbox" checked="" class="i-checks" disabled> <i></i>3ª</label></ui>
+                                            <ui><label><input  id="primeiraD" type="checkbox" value="${user.recebeuDose(br.com.anhanguera.caranavirus.enuns.NumeroDosagemEnum.PRIMEIRA) }"  class="i-checks" > <i></i>1ª</label></ui>
+                                            <ui><label><input id="segundaD" type="checkbox" value="${user.recebeuDose(br.com.anhanguera.caranavirus.enuns.NumeroDosagemEnum.SEGUNDA) }"  class="i-checks" > <i></i>2ª</label></ui>
+                                            <ui><label><input id="terceiraD" type="checkbox" value="${user.recebeuDose(br.com.anhanguera.caranavirus.enuns.NumeroDosagemEnum.TERCEIRA) }" checked="" class="i-checks" > <i></i>3ª</label></ui>
                                         </td>
                                         <td>
-                                            <ui><button class="btn btn-info info-icon-notika btn-reco-mg btn-button-mg"><i class="notika-icon notika-search"></i></button></ui>
-                                            <ui><button class="btn btn-success success-icon-notika btn-reco-mg btn-button-mg"><i class="notika-icon notika-menu"></i></button></ui>
+<!--                                             <ui><a th:href="@{/asdf/{id}(id = ${user.id})}" class="btn btn-info info-icon-notika btn-reco-mg btn-button-mg">asdf</a></ui> -->
+                                            <ui><button class="btn btn-success success-icon-notika btn-reco-mg btn-button-mg" onclick="preencherInput(id)" th:attr="id=${user.id}"><i class="notika-icon notika-menu"> </i>Ver</button></ui>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -145,9 +145,20 @@
             </div>
         </div>
     </div>
-    <!-- End Footer area-->
-    <!-- jquery
-		============================================ -->
+    
+    	<form action="form-user" name="form" id="form" >
+				<input name="id" id="id" type="hidden" value={id} />
+    	</form>
+
+	<script type="text/javascript">
+		function preencherInput(id) {
+			document.getElementById("id").value = parseInt(id)
+			var form = document.getElementById("form")
+			form.submit();
+			console.log(form)
+		}
+	</script>
+		
     <script src="js/vendor/jquery-1.12.4.min.js"></script>
     <!-- bootstrap JS
 		============================================ -->
@@ -209,6 +220,20 @@
     <!-- main JS
 		============================================ -->
     <script src="js/main.js"></script>
+    
+    		<script type="text/javascript">
+			function enviarId(id){
+				
+				console.log(id)
+				
+				document.getElementById("id").value = id
+				var form = document.getElement("form")
+				
+				form.submit();
+				
+			}
+		</script>
+    
 	<!-- tawk chat JS
 		============================================ -->
 </body>

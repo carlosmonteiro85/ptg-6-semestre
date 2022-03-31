@@ -1,4 +1,4 @@
-package br.com.anhanguera.caranavirus.data.entity;
+package br.com.anhanguera.caranavirus.entity;
 
 import java.time.LocalDate;
 

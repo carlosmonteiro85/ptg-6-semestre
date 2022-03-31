@@ -8,7 +8,7 @@ import java.net.URL;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
-import br.com.anhanguera.caranavirus.data.entity.Adress;
+import br.com.anhanguera.caranavirus.entity.Adress;
 
 
 

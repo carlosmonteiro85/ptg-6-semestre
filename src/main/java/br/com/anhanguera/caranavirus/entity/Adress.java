@@ -1,4 +1,4 @@
-package br.com.anhanguera.caranavirus.data.entity;
+package br.com.anhanguera.caranavirus.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +21,6 @@ public class Adress {
 	@Column(name = "cep")
 	private String numeroCEP;
 	private String logradouro;
-	private String numero;
 	private String complemento;
 	private String bairro;
 	@Column(name = "cidade")

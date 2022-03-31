@@ -1,6 +1,6 @@
-package br.com.anhanguera.caranavirus.data.entity;
+package br.com.anhanguera.caranavirus.entity;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import br.com.anhanguera.caranavirus.enuns.NumeroDosagemEnum;
 import br.com.anhanguera.caranavirus.enuns.TipoSanguinioEnum;
 import lombok.Data;
 
@@ -35,10 +36,24 @@ public class User {
 	private TipoSanguinioEnum tipoSanguinio;
 	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST})
 	@JoinColumn(name="vacina_id")
-	private List<Vacina> vacinas = new ArrayList<>();
+	private List<Vacina> vacinas = new LinkedList<>();
 	
 	public String concatenarEndereco() {
 		return endereco.getLogradouro()+" "+ endereco.getLocalidade()+" "+ endereco.getUf();
 	}
+	
+	public boolean recebeuDose(NumeroDosagemEnum numeroDose) {
+		
+		boolean confirmacaoVacina = false;
+		
+		for (Vacina vacina : vacinas) {
+			if(vacina.getNumeracaoDose().equals(numeroDose)) {
+				confirmacaoVacina = true;
+				break;
+			}
+		}
+		return confirmacaoVacina;
+	}
+	
 	
 }
