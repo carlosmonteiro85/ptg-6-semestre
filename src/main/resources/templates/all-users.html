@@ -87,11 +87,11 @@
                                     <tr >
                                         <th>Nome</th>
                                         <th>Endereço</th>
-                                        <th>Telefone</th>
+<!--                                         <th>Telefone</th> -->
                                         <!-- <th>Celular</th> -->
                                         <th>Tipo Sanguínio</th>
                                         <th>Profissão</th>
-                                        <th>Numero de Dosagem tomada</th>
+                                        <th>Qt Dosagem recebida</th>
                                         <th>Açoes</th>
                                     </tr>
                                 </thead>
@@ -99,17 +99,16 @@
                                     <tr th:each="user : ${users}"  >
                                         <td th:text="${user.name}">Tiger Nixon</td>
                                         <td th:text="${user.concatenarEndereco}" >QNP 14 Conj Ceilândia - DF</td>
-                                        <td th:text="${user.telefone}" >61 3333-3361</td>
+<!--                                         <td th:text="${user.telefone}" >61 3333-3361</td> -->
                                         <!-- <td th:text="${user.celular}" >61 99999-9999</td> -->
                                         <td th:text="${user.tipoSanguinio.descricao}" >A+</td>
                                         <td th:text="${user.profissao}" >Desenvolvedor</td>
                                         <td>
-                                            <ui><label><input  id="primeiraD" type="checkbox" value="${user.recebeuDose(br.com.anhanguera.caranavirus.enuns.NumeroDosagemEnum.PRIMEIRA) }"  class="i-checks" > <i></i>1ª</label></ui>
-                                            <ui><label><input id="segundaD" type="checkbox" value="${user.recebeuDose(br.com.anhanguera.caranavirus.enuns.NumeroDosagemEnum.SEGUNDA) }"  class="i-checks" > <i></i>2ª</label></ui>
-                                            <ui><label><input id="terceiraD" type="checkbox" value="${user.recebeuDose(br.com.anhanguera.caranavirus.enuns.NumeroDosagemEnum.TERCEIRA) }" checked="" class="i-checks" > <i></i>3ª</label></ui>
+<!--                                             <ui th:each="vacina : ${user.vacinas}"  ><label th:text="${vacina.numeracaoDose.dose} + recebida"><input  id="primeiraD" type="checkbox" th:checked="${true}"  class="i-checks" > <i></i>1ª</label></ui> -->
+<!--                                             <ui><label><input id="segundaD" type="checkbox"   th:checked="${}" class="i-checks" > <i></i>2ª</label></ui> -->
+                                            <ui><label th:text="${user.vacinas.size}" ><input id="terceiraD" type="checkbox"  th:checked="${}" class="i-checks" > <i></i>3ª</label></ui>
                                         </td>
                                         <td>
-<!--                                             <ui><a th:href="@{/asdf/{id}(id = ${user.id})}" class="btn btn-info info-icon-notika btn-reco-mg btn-button-mg">asdf</a></ui> -->
                                             <ui><button class="btn btn-success success-icon-notika btn-reco-mg btn-button-mg" onclick="preencherInput(id)" th:attr="id=${user.id}"><i class="notika-icon notika-menu"> </i>Ver</button></ui>
                                         </td>
                                     </tr>
@@ -117,11 +116,11 @@
                                 <tr>
                                     <th>Nome</th>
                                     <th>Endereço</th>
-                                    <th>Telefone</th>
+<!--                                     <th>Telefone</th> -->
                                     <!-- <th>Celular</th> -->
                                     <th>Tipo Sanguínio</th>
                                     <th>Profissão</th>
-                                    <th>Numero de Dosagem tomada</th>
+                                    <th>Qt Dosagem recebida</th>
                                     <th>Açoes</th>
                                 </tr>
                             </table>

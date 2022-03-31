@@ -198,7 +198,7 @@
 										<td th:text="${vacina.marcaVacina}">Alexandra</td>
 										<td th:text="${vacina.dataAplicacao}">Christopher</td>
 										<td><ui>
-											<button style="border-radius: 80%;" onclick="asdf(id)"
+											<button style="border-radius: 80%;" onclick="verDosagem(id)"
 												th:attr="id=${vacina.id}"
 												class="btn btn-primary warning-icon-notika btn-reco-mg btn-button-mg"
 												data-toggle="modal" data-target="#myModalone2">
@@ -222,7 +222,7 @@
 									<div class="modal-body">
 										<h2>Adicionar vacina</h2>
 										<div class="row">
-											<form th:object="${userDto}" action="" method="post">
+											<form th:object="${userDto}" action="add/vacina" method="post">
 												<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 													<div class="form-group ic-cmp-int">
 														<div class="form-ic-cmp"></div>
@@ -380,7 +380,7 @@
 		var vacinas = /*[[${userDto.vacinas}]]*/"Vacinas";
 		/*]]>*/
 		
-		function asdf(id){
+		function verDosagem(id){
 			
 			for (var key in vacinas) {
 		    // skip loop if the property is from prototype
