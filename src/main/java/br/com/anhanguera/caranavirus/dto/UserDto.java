@@ -1,8 +1,13 @@
-package br.com.anhanguera.caranavirus.entity;
+package br.com.anhanguera.caranavirus.dto;
 
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.validation.constraints.NotBlank;
+
+import br.com.anhanguera.caranavirus.entity.Adress;
+import br.com.anhanguera.caranavirus.entity.User;
+import br.com.anhanguera.caranavirus.entity.Vacina;
 import br.com.anhanguera.caranavirus.enuns.NumeroDosagemEnum;
 import br.com.anhanguera.caranavirus.enuns.TipoSanguinioEnum;
 import lombok.Data;
@@ -11,9 +16,11 @@ import lombok.Data;
 public class UserDto {
 	
 	private Long id;
+	@NotBlank
 	private String name;
 	private Adress adress;
 	private String telefone;
+	@NotBlank
 	private String celular;
 	private String profissao;
 	private TipoSanguinioEnum tipoSanguinio;

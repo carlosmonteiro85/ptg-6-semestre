@@ -1,0 +1,25 @@
+<div th:fragment="titulo(valor)" class="jumbotron mb-2 mt-2">
+	<h1 class="display-4" th:text="${valor}"></h1>
+</div>
+
+
+<div th:fragment="sucesso(mensagem)"
+	class="alert alert-success alert-dismissible fade show" role="alert">
+	<div th:text="${mensagem}">...</div>
+	<button type="button" class="btn-close" data-bs-dismiss="alert"
+		aria-label="Close"></button>
+</div>
+
+<div th:fragment="alerta(mensagem)"
+	class="alert alert-warning alert-dismissible fade show" role="alert">
+	<div th:text="${mensagem}">...</div>
+	<button type="button" class="btn-close" data-bs-dismiss="alert"
+		aria-label="Close"></button>
+</div>
+
+<div th:fragment="erro(mensagem)"
+	class="alert alert-danger alert-dismissible fade show" role="alert">
+	<div th:text="${mensagem}">...</div>
+	<button type="button" class="btn-close" data-bs-dismiss="alert"
+		aria-label="Close"></button>
+</div>
