@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -73,6 +74,46 @@ public class HomeController {
 	@RequestMapping("form-user")
 	public String profile(UserDto userDto) {
 		return "form-user";
+	}
+
+	@RequestMapping("update-user/{id}")
+	public String updateUser(@PathVariable("id") Long id, @Valid UserDto userDto, BindingResult result,
+			RedirectAttributes attributes) {
+
+		String mensagem = "";
+
+		if (result.hasErrors() || userDto.getName().isEmpty() || userDto.getAdress() == null
+				|| userDto.getTipoSanguinio() == null) {
+			mensagem = " Os campos nome, endereço, celular e tipo sanguinio são obrigatórios";
+			attributes.addFlashAttribute("msnError", mensagem);
+			return "redirect:/profile?id="+ id.toString();
+		}
+
+		try {
+			Optional<User> userLoad = service.loadById(id);
+			
+			if(userLoad.isPresent() && userDto.getId().equals(userLoad.get().getId())) {
+				
+				userLoad.get().setEndereco(userDto.getAdress());
+				userLoad.get().setCelular(userDto.getCelular());
+				userLoad.get().setId(userDto.getId());
+				userLoad.get().setName(userDto.getName());
+				userLoad.get().setProfissao(userDto.getProfissao());
+				userLoad.get().setTelefone(userDto.getTelefone());
+				userLoad.get().setTipoSanguinio(userDto.getTipoSanguinio());
+				userLoad.get().setVacinas(userDto.getVacinas());
+				
+				service.save(userLoad.get());				
+				mensagem = "O cadastro atualizado com sucesso";
+				attributes.addFlashAttribute("msnSucess", mensagem);
+			}
+			
+		} catch (Exception e) {
+			mensagem = "Houve um erro ao reculperar o cadastro do usuario ";
+			attributes.addFlashAttribute("msnError", mensagem);
+			return "redirect:/";
+		}
+		return "redirect:/profile?id="+ id.toString();			
 	}
 
 }

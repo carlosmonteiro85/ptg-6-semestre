@@ -63,5 +63,4 @@ public class UserDto {
 		this.tipoSanguinio = user.getTipoSanguinio();
 		return this;
 	}
-
 }

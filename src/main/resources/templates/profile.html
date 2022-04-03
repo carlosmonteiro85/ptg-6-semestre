@@ -47,8 +47,22 @@
 	<div class="form-element-area">
 		<div class="container">
 			<div class="row">
-				<form th:object="${userDto}" action="add-user" method="post">
+				<form th:object="${userDto}" th:action="@{update-user/{id}(id = ${userDto.id})}" method="post">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<!-- 				INICIO DOS ALERTAS -->
+							<div class="alert alert-danger alert-dismissible" role="alert"
+								th:if="${msnError}">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-label="Close">x</button>
+								<h5 th:text="${msnError}">Mensagem</h5>
+							</div>
+							<div class="alert alert-success alert-dismissible" role="alert"
+								th:if="${msnSucess}">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-label="Close">x</button>
+								<h5 th:text="${msnSucess}">Mensagem</h5>
+							</div>
+						<!-- 					FINAL DOS ALERTAS -->
 						<div class="form-element-list">
 							<div class="cmp-tb-hd bcs-hd">
 								<h2>Cadastro de Usuário</h2>
@@ -62,7 +76,7 @@
 										</div>
 										<div class="nk-int-st">
 											<input type="text" th:field="*{name}" class="form-control"
-												placeholder="Nome">
+												placeholder="Nome" required>
 										</div>
 									</div>
 								</div>
@@ -73,7 +87,7 @@
 										</div>
 										<div class="nk-int-st">
 											<input type="text" th:field="*{celular}" class="form-control"
-												data-mask="(99) 99999 - 9999" placeholder="Celular">
+												data-mask="(99) 99999 - 9999" placeholder="Celular" required>
 										</div>
 									</div>
 								</div>
@@ -91,7 +105,7 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+								<div class="col-lg-2 col-md-4 col-sm-4 col-xs-12">
 									<div class="form-group ic-cmp-int">
 										<div class="form-ic-cmp">
 											<i class="notika-icon notika-next"></i>
@@ -103,14 +117,60 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-lg-9 col-md-4 col-sm-4 col-xs-12">
+								<div class="col-lg-5 col-md-4 col-sm-4 col-xs-12">
 									<div class="form-group ic-cmp-int">
 										<div class="form-ic-cmp">
 											<i class="notika-icon notika-map"></i>
 										</div>
 										<div class="nk-int-st">
-											<input type="text" id="endereco" class="form-control"
-												placeholder="Endereço" readonly="readonly" />
+											<input type="text" id="logradouro" class="form-control"
+											 placeholder="Logradouro" th:field="*{adress.logradouro}" readonly="readonly" />
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-5 col-md-4 col-sm-4 col-xs-12">
+									<div class="form-group ic-cmp-int">
+										<div class="form-ic-cmp">
+											<i class="notika-icon notika-map"></i>
+										</div>
+										<div class="nk-int-st">
+											<input type="text" id="localidade" class="form-control"
+											 placeholder="Cidade" th:field="*{adress.localidade}" readonly="readonly" />
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+									<div class="form-group ic-cmp-int">
+										<div class="form-ic-cmp">
+											<i class="notika-icon notika-next"></i>
+										</div>
+										<div class="nk-int-st">
+											<input type="text" id="bairro" 
+												class="form-control" th:field="*{adress.bairro}" readonly="readonly" placeholder="Bairro" >
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+									<div class="form-group ic-cmp-int">
+										<div class="form-ic-cmp">
+											<i class="notika-icon notika-map"></i>
+										</div>
+										<div class="nk-int-st">
+											<input type="text" id="uf" class="form-control"
+											 placeholder="UF" th:field="*{adress.uf}" readonly="readonly" />
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+									<div class="form-group ic-cmp-int">
+										<div class="form-ic-cmp">
+											<i class="notika-icon notika-map"></i>
+										</div>
+										<div class="nk-int-st">
+											<input type="text" id="complemento" class="form-control"
+											 placeholder="Complemento" th:field="*{adress.complemento}" />
 										</div>
 									</div>
 								</div>
@@ -128,35 +188,20 @@
 									</div>
 								</div>
 
-								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+								<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
 									<div class="form-group ic-cmp-int">
 										<div class="form-ic-cmp">
 											<i class="notika-icon notika-star"></i>
 										</div>
 										<div class="bootstrap-select ">
-											<select class="selectpicker">
-												<option th:if="${userDto.tipoSanguinio == null}">Tipo
-													Sanguinio</option>
-												<option th:unless="${userDto != null}" selected
-													th:text="${userDto.tipoSanguinio.descricao}"
-													th:value="${userDto.tipoSanguinio}">Tipo Sanguinio</option>
-												<option
-													th:each=" tipoSanguinio : ${T(br.com.anhanguera.caranavirus.enuns.TipoSanguinioEnum).values()}"
-													th:value="${tipoSanguinio}"
-													th:text="${tipoSanguinio.descricao}"></option>
+											<select name="tipoSanguinio" class="selectpicker" required>
+												<option selected th:text="*{tipoSanguinio.descricao}" th:value="*{tipoSanguinio}">One</option>
+												<option th:each="tipoSanguinio : ${T(br.com.anhanguera.caranavirus.enuns.TipoSanguinioEnum).values()}"
+													th:value="${tipoSanguinio}" th:text="${tipoSanguinio.descricao}"></option>
 											</select>
 										</div>
 									</div>
 								</div>
-								<input id="numeroCEP" type="hidden"
-									th:field="${userDto.adress.numeroCEP}"> <input
-									id="logradouro" type="hidden"
-									th:field="${userDto.adress.logradouro}"> <input
-									id="bairro" type="hidden" th:field="${userDto.adress.bairro}">
-								<input id="localidade" type="hidden"
-									th:field="${userDto.adress.localidade}"> <input id="uf"
-									type="hidden" th:field="${userDto.adress.uf}">
-
 							</div>
 							<div
 								style="margin-top: 30px; margin-left: 3%; margin-bottom: 20px"
@@ -416,7 +461,7 @@
 	<script type="text/javascript">
 		
 	   window.onload = function () {
-		   buscarCep();
+// 		   buscarCep();
 		    }
 	
 	</script>
@@ -428,37 +473,16 @@
     		
     		var url = "http://viacep.com.br/ws/"+cep+"/json/";
     		
-    			var cep2 = "";
-				var logradouro = "";
-				var bairro = "";
-				var localidade = "";
-				var uf = "";
-    		
     			const userData = fetch(url)
     		  	 .then(response => response.json())
     		 	  .then(data => {
-    			   
-    			cep2 = data.cep;
-   				logradouro = data.logradouto;
-   				bairro = data.bairro;
-   				localidade = data.localidade
-   				uf = data.uf;
-   				
-     			document.getElementById('endereco').value = bairro+" "+localidade+" "+uf;
-     			
-   				document.getElementById('numeroCEP').value = cep2;
-   				document.getElementById('logradouro').value = logradouro
-   				document.getElementById('bairro').value = bairro
-   				document.getElementById('localidade').value = localidade
-   				document.getElementById('uf').value = uf
-   				
-   				console.log(cep2)
-   				console.log(cep)
+   			
+    		 	document.getElementById('logradouro').value = data.logradouro;
+    		 	document.getElementById('localidade').value = data.localidade;
+    		 	document.getElementById('bairro').value = data.bairro;
+    		 	document.getElementById('uf').value = data.uf;
 
     		   }).catch(error => {
-    			   
-    			   alert("Cep nao encontrado")
-  					document.getElementById('endereco').value = "";
     		   })			
     	}
     </script>

@@ -35,4 +35,8 @@ public class Adress {
 		this.localidade = localidade;
 		this.uf = uf;
 	}
+	
+	public String concatenarEndereco() {
+		return bairro+" "+ localidade+" "+ uf;
+	}
 }
