@@ -326,7 +326,7 @@
  
 /* small mobile :320px. */
 @media (max-width: 767px) {
-	.container {width:300px}
+	.container {width:420px}
 	.main-menu-area{
 		display:none;
 	}
