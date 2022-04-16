@@ -108,7 +108,6 @@ public class HomeController {
 				userLoad.get().setProfissao(userDto.getProfissao());
 				userLoad.get().setTelefone(userDto.getTelefone());
 				userLoad.get().setTipoSanguinio(userDto.getTipoSanguinio());
-				userLoad.get().setVacinas(userDto.getVacinas());
 				
 				service.save(userLoad.get());				
 				mensagem = "O cadastro atualizado com sucesso";
