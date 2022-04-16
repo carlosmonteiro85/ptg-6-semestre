@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import br.com.anhanguera.caranavirus.enuns.NomeVacinaEnum;
 import br.com.anhanguera.caranavirus.enuns.NumeroDosagemEnum;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,13 +24,14 @@ public class Vacina {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Enumerated(EnumType.STRING)
-	private NumeroDosagemEnum numeracaoDose;
+	private NumeroDosagemEnum numeracaoDose = NumeroDosagemEnum.DEFAULT;
 	@Column(name = "nome_vacina")
-	private String marcaVacina;
+	@Enumerated(EnumType.STRING)
+	private NomeVacinaEnum marcaVacina;
 	@Column(name = "data_aplicacao")
 	private LocalDate dataAplicacao;
 	
-	public Vacina(NumeroDosagemEnum numeracaoDose, String marcaVacina, LocalDate dataAplicacao) {
+	public Vacina(NumeroDosagemEnum numeracaoDose, NomeVacinaEnum marcaVacina, LocalDate dataAplicacao) {
 		this.numeracaoDose = numeracaoDose;
 		this.marcaVacina = marcaVacina;
 		this.dataAplicacao = dataAplicacao;

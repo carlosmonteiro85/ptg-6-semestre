@@ -240,7 +240,7 @@
 								<tbody>
 									<tr th:each=" vacina : ${userDto.vacinas}">
 										<td th:text="${vacina.numeracaoDose.dose}">1</td>
-										<td th:text="${vacina.marcaVacina}">Alexandra</td>
+										<td th:text="${vacina.marcaVacina.nomeVacina}">Alexandra</td>
 										<td th:text="${vacina.dataAplicacao}">Christopher</td>
 										<td><ui>
 											<button style="border-radius: 80%;" onclick="verDosagem(id)"
@@ -257,17 +257,17 @@
 					</div>
 				</div>
 				<div class="modals-single">
-					<div class="modals-default-cl">
-						<div class="modal fade" id="myModalone" role="dialog">
-							<div class="modal-dialog modals-default">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">&times;</button>
-									</div>
-									<div class="modal-body">
-										<h2>Adicionar vacina</h2>
-										<div class="row">
-											<form th:object="${userDto}" action="add/vacina" method="post">
+					<form th:object="${newVacina}" th:action="@{add-vacina/{idUser}(idUser = ${userDto.id})}" method="post">
+						<div class="modals-default-cl">
+							<div class="modal fade" id="myModalone" role="dialog">
+								<div class="modal-dialog modals-default">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+										</div>
+										<div class="modal-body">
+											<h2>Adicionar vacina</h2>
+											<div class="row">
 												<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 													<div class="form-group ic-cmp-int">
 														<div class="form-ic-cmp"></div>
@@ -276,7 +276,7 @@
 																<option>Nº Dose</option>
 																<option
 																	th:each=" numeracaoVacina : ${T(br.com.anhanguera.caranavirus.enuns.NumeroDosagemEnum).values()}"
-																	th:value="${numeracaoVacina}"
+																	th:value="*{numeracaoDose}"
 																	th:text="${numeracaoVacina.dose}"></option>
 															</select>
 														</div>
@@ -284,12 +284,16 @@
 												</div>
 												<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 													<div class="form-group ic-cmp-int">
-														<div class="form-ic-cmp">
-															<i class="notika-icon notika-next"></i>
-														</div>
-														<div class="nk-int-st">
-															<input type="text" class="form-control"
-																placeholder="Marca vacína">
+														<div class="bootstrap-select ">
+															<select class="selectpicker" th:field="*{marcaVacina}"
+																required>
+																<option value="">Marca vacina</option>
+																<option
+																	th:each=" nomeVacinaEnum : ${T(br.com.anhanguera.caranavirus.enuns.NomeVacinaEnum).values()}"
+																	th:value="${nomeVacinaEnum}"
+																	th:text="${nomeVacinaEnum.nomeVacina}"
+																	selected="selected"></option>
+															</select>
 														</div>
 													</div>
 												</div>
@@ -299,23 +303,21 @@
 														<div class="input-group date nk-int-st">
 															<span class="input-group-addon"></span> <input
 																type="text" class="form-control"
-																placeholder="Data aplicação">
+																placeholder="Data aplicação" th:field="*{dataAplicacao}">
 														</div>
 													</div>
 												</div>
-											</form>
+											</div>
 										</div>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default"
-											data-dismiss="modal">Adicionar</button>
-										<button type="button" class="btn btn-default"
-											data-dismiss="modal">Cancelar</button>
+										<div class="modal-footer">
+											<button type="submit" class="btn btn-default" >Adicionar</button>
+											<button type="reset" class="btn btn-default" >Cancelar</button>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					</form>
 				</div>
 				<div class="modals-single">
 					<div class="modals-default-cl">
@@ -328,40 +330,37 @@
 									<div class="modal-body">
 										<h2>Vacinas recebidas</h2>
 										<div class="row">
-											<form th:object="${userDto}" action="" method="post">
-												<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-													<div class="form-group ic-cmp-int">
-														<div class="form-ic-cmp">
-															<i class="notika-icon notika-next"></i>
-														</div>
-														<div class="nk-int-st">
-															<input type="text" class="form-control"
-																id="numeracaoDose" placeholder="Numero dosagem">
-														</div>
+											<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+												<div class="form-group ic-cmp-int">
+													<div class="form-ic-cmp">
+														<i class="notika-icon notika-next"></i>
+													</div>
+													<div class="nk-int-st">
+														<input type="text" class="form-control" id="numeracaoDoseVisualizacao" readonly="readonly"/>
 													</div>
 												</div>
-												<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-													<div class="form-group ic-cmp-int">
-														<div class="form-ic-cmp">
-															<i class="notika-icon notika-next"></i>
-														</div>
-														<div class="nk-int-st">
-															<input type="text" class="form-control" id="marcaVacina"
-																placeholder="Marca vacína">
-														</div>
+											</div>
+											<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+												<div class="form-group ic-cmp-int">
+													<div class="form-ic-cmp">
+														<i class="notika-icon notika-next"></i>
+													</div>
+													<div class="nk-int-st">
+														<input type="text" class="form-control" id="marcaVacinaVisualizacao"
+															readonly="readonly" />
 													</div>
 												</div>
-												<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-													<div class="form-group nk-datapk-ctm form-elet-mg"
-														id="data_2">
-														<div class="input-group date nk-int-st">
-															<span class="input-group-addon"></span> <input
-																type="text" class="form-control" id="dataAplicacao"
-																placeholder="Data aplicação">
-														</div>
+											</div>
+											<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+												<div class="form-group nk-datapk-ctm form-elet-mg"
+													id="data_2">
+													<div class="input-group date nk-int-st">
+														<span class="input-group-addon"></span> <input type="text"
+															class="form-control" id="dataAplicacaoVisualizacao"
+															readonly="readonly" />
 													</div>
 												</div>
-											</form>
+											</div>
 										</div>
 									</div>
 									<div class="modal-footer">
@@ -433,6 +432,8 @@
 		
 		    var obj = vacinas[key];
 		    
+		    console.log(obj)
+		    
 
 		    var idVacina = Object.getOwnPropertyDescriptor(obj, 'id')
 		    var marcaVacina = Object.getOwnPropertyDescriptor(obj, 'marcaVacina')
@@ -446,9 +447,9 @@
 		    
 		    if(idVacina.value == id ){
 		    	
-		    	document.getElementById("marcaVacina").value = marcaVacina.value;
-		    	document.getElementById("dataAplicacao").value = dataFormatada;		    	
-		    	document.getElementById("numeracaoDose").value = numeracaoDose.value;
+		    	document.getElementById("marcaVacinaVisualizacao").value = marcaVacina.value;
+		    	document.getElementById("dataAplicacaoVisualizacao").value = dataFormatada;		    	
+		    	document.getElementById("numeracaoDoseVisualizacao").value = numeracaoDose.value;
 		    	break
 		    }
 		}

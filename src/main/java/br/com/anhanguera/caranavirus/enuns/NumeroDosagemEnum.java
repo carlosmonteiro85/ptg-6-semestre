@@ -2,7 +2,7 @@ package br.com.anhanguera.caranavirus.enuns;
 
 public enum NumeroDosagemEnum {
 	
-	PRIMEIRA("1ª"), SEGUNDA("2ª"), TERCEIRA("3ª");
+	PRIMEIRA("1ª"), SEGUNDA("2ª"), TERCEIRA("3ª"), DEFAULT("0ª");
 	
 	private String dose;
 	

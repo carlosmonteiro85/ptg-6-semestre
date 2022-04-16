@@ -17,7 +17,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.anhanguera.caranavirus.dto.UserDto;
 import br.com.anhanguera.caranavirus.entity.User;
+import br.com.anhanguera.caranavirus.entity.Vacina;
 import br.com.anhanguera.caranavirus.service.UserService;
+import br.com.anhanguera.caranavirus.service.VacinaService;
 
 @Controller
 @RequestMapping("/")
@@ -25,6 +27,9 @@ public class HomeController {
 
 	@Autowired
 	UserService service;
+	
+	@Autowired
+	VacinaService vacinaService;
 
 	@GetMapping("")
 	public String listAll(Model model) {
@@ -36,12 +41,14 @@ public class HomeController {
 	@RequestMapping("profile")
 	public String formUser(Long id, Model model) {
 		UserDto userDto = new UserDto();
+		Vacina vacina = new Vacina();
 		if (id != null) {
 			Optional<User> user = service.loadById(id);
 			if (user.isPresent()) {
 				userDto.userToUserDto(user.get());
 			}
 		}
+		model.addAttribute("newVacina", vacina);
 		model.addAttribute("userDto", userDto);
 		return "profile";
 	}
@@ -115,5 +122,37 @@ public class HomeController {
 		}
 		return "redirect:/profile?id="+ id.toString();			
 	}
+	
+	@PostMapping("add-vacina/{idUser}")
+	public String addVacina(@PathVariable("idUser") Long idUser, @Valid Vacina vacina, BindingResult result,
+			RedirectAttributes attributes) {
 
+		String mensagem = "";
+
+		if ( vacina.getMarcaVacina() == null|| vacina.getDataAplicacao() == null  ) {
+			mensagem = " Os campos marca da vacina e data de aplicação são obrigatórios";
+			attributes.addFlashAttribute("msnError", mensagem);
+			return "redirect:/profile?id="+ idUser.toString();	
+		}
+
+		try {
+			Optional<User> userLoad = service.loadById(idUser);
+			if(userLoad.isPresent()) {
+				
+				if(!vacinaService.validarVacina(userLoad.get(), vacina)) {
+					throw new Exception("Erro ao adicionar essa vacina");
+				}
+				vacinaService.save(vacina);
+				service.save(userLoad.get());
+				mensagem = "Vacina adicionada com sucesso";
+				attributes.addFlashAttribute("msnSucess", mensagem);
+			}
+			
+		} catch (Exception e) {
+			mensagem = "Usuário já possue a dosazem maxima exigida";
+			attributes.addFlashAttribute("msnError", mensagem);
+			return "redirect:/profile?id="+ idUser.toString();	
+		}
+		return "redirect:/profile?id="+ idUser.toString();			
+	}
 }

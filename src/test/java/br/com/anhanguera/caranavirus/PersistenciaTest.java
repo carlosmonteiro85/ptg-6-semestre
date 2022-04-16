@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.com.anhanguera.caranavirus.entity.Adress;
 import br.com.anhanguera.caranavirus.entity.User;
 import br.com.anhanguera.caranavirus.entity.Vacina;
+import br.com.anhanguera.caranavirus.enuns.NomeVacinaEnum;
 import br.com.anhanguera.caranavirus.enuns.NumeroDosagemEnum;
 import br.com.anhanguera.caranavirus.enuns.TipoSanguinioEnum;
 import br.com.anhanguera.caranavirus.repository.UserRepository;
@@ -39,9 +40,9 @@ public class PersistenciaTest extends CaranaVirusApplicationTests{
 		user.setTelefone(faker.phoneNumber().phoneNumber());
 		user.setTipoSanguinio(TipoSanguinioEnum.A_POSITIVO);
 		
-		user.getVacinas().add(new Vacina(NumeroDosagemEnum.PRIMEIRA,"PFIZER", LocalDate.now().minusDays(60)));
-		user.getVacinas().add(new Vacina(NumeroDosagemEnum.SEGUNDA,"PFIZER", LocalDate.now().minusDays(30)));
-		user.getVacinas().add(new Vacina(NumeroDosagemEnum.TERCEIRA,"PFIZER", LocalDate.now()));
+		user.getVacinas().add(new Vacina(NumeroDosagemEnum.PRIMEIRA,NomeVacinaEnum.ASTRAZENECA, LocalDate.now().minusDays(60)));
+		user.getVacinas().add(new Vacina(NumeroDosagemEnum.SEGUNDA,NomeVacinaEnum.JANSSEN, LocalDate.now().minusDays(30)));
+		user.getVacinas().add(new Vacina(NumeroDosagemEnum.TERCEIRA,NomeVacinaEnum.PFIZER, LocalDate.now()));
 		
 		Adress endereco = cepService.getEndereco("72231804");
 		user.setEndereco(endereco);
@@ -49,7 +50,7 @@ public class PersistenciaTest extends CaranaVirusApplicationTests{
 	
 	@AfterEach
 	public void deleteUserTest() {
-		repository.deleteAll();
+		//repository.deleteAll();
 	}
 	
 	@Test

@@ -32,12 +32,5 @@ public class UserService {
 	public void delete(User usuario) {
 		usuarioRepository.delete(usuario);
 	}
-//
-//	public List<User> findAll(Pageable page, String filter) {
-//		return usuarioRepository.search(filter, page).getContent();
-//	}
-//	
-//	public Integer getUsuarioCount(String filter) {
-//		return usuarioRepository.countBy(filter);
-//	}
+
 }
