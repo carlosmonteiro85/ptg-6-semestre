@@ -73,7 +73,7 @@
 										</div>
 										<div class="nk-int-st">
 											<input type="text" th:field="*{name}" class="form-control"
-												placeholder="Nome" required>
+												placeholder="Nome" id="nome" required>
 										</div>
 									</div>
 								</div>
@@ -84,7 +84,7 @@
 										</div>
 										<div class="nk-int-st">
 											<input type="text" th:field="*{celular}" class="form-control"
-												data-mask="(99) 99999 - 9999" placeholder="Celular" required>
+												id="celular" data-mask="(99) 99999 - 9999" placeholder="Celular" required>
 										</div>
 									</div>
 								</div>
@@ -110,7 +110,7 @@
 										<div class="nk-int-st">
 											<input type="text" id="cep" onblur="buscarCep()"
 												class="form-control" data-mask="99999 - 999"
-												placeholder="CEP" th:field="*{adress.numeroCEP}">
+												placeholder="CEP" th:field="*{adress.numeroCEP}" required="required">
 										</div>
 									</div>
 								</div>
@@ -146,7 +146,7 @@
 										</div>
 										<div class="bootstrap-select ">
 											<select class="selectpicker" th:field="*{tipoSanguinio}"
-												required>
+												id="tipoSanguinio" required>
 												<option value="">Tipo Sanguinio</option>
 												<option
 													th:each=" tipoSanguinio : ${T(br.com.anhanguera.caranavirus.enuns.TipoSanguinioEnum).values()}"
@@ -169,8 +169,8 @@
 							<div
 								style="margin-top: 30px; margin-left: 3%; margin-bottom: 20px"
 								class="form-example-int mg-t-15">
-								<button class="btn btn-success notika-btn-success">Salvar</button>
-								<button type="reset" class="btn btn-danger notika-btn-danger">Cancelar</button>
+								<button id="button" class="btn btn-success notika-btn-success" disabled="disabled">Salvar</button>
+								<a href="/form-user" class="btn btn-danger notika-btn-danger">Cancelar</a>
 							</div>
 						</div>
 					</div>
@@ -296,6 +296,22 @@
 						document.getElementById('endereco').value = "";
 			   })			
 		}
+	   	
+	   	
+    	
+    	$(document).ready(function (){
+    	    validate();
+    	    $('#nome, #celular, #cep, #tipoSanguinio').change(validate);
+    	});
+
+    	function validate(){
+    	    if ($('#nome').val().length > 0 && $('#celular').val().length > 0 && $('#cep').val().length > 0 && $('#tipoSanguinio').val().length > 0 ) {
+    	        $("#button").prop("disabled", false);
+    	    }
+    	    else {
+    	        $("#button").prop("disabled", true);
+    	    }
+    	}
 	
 	</script>
 </body>

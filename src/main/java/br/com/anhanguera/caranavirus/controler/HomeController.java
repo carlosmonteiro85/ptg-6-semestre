@@ -140,8 +140,17 @@ public class HomeController {
 			if(userLoad.isPresent()) {
 				
 				if(!vacinaService.validarVacina(userLoad.get(), vacina)) {
-					throw new Exception("Erro ao adicionar essa vacina");
+					mensagem = "Esse usuário ja recebeu a dose maxima dessa vacina";
+					attributes.addFlashAttribute("msnError", mensagem);
+					throw new Exception();
 				}
+				
+				if(!vacinaService.validarDataDose(userLoad.get(), vacina)) {
+					mensagem = "Essa vacina não pode ser aplicada por pois a data da aplicação é menor que a exigida para esse tipo de vacina";
+					attributes.addFlashAttribute("msnError", mensagem);
+					throw new Exception();
+				}
+				
 				vacinaService.save(vacina);
 				service.save(userLoad.get());
 				mensagem = "Vacina adicionada com sucesso";
@@ -149,8 +158,6 @@ public class HomeController {
 			}
 			
 		} catch (Exception e) {
-			mensagem = "Usuário já possue a dosazem maxima exigida";
-			attributes.addFlashAttribute("msnError", mensagem);
 			return "redirect:/profile?id="+ idUser.toString();	
 		}
 		return "redirect:/profile?id="+ idUser.toString();			

@@ -47,21 +47,22 @@
 	<div class="form-element-area">
 		<div class="container">
 			<div class="row">
-				<form th:object="${userDto}" th:action="@{update-user/{id}(id = ${userDto.id})}" method="post">
+				<form th:object="${userDto}"
+					th:action="@{update-user/{id}(id = ${userDto.id})}" method="post">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<!-- 				INICIO DOS ALERTAS -->
-							<div class="alert alert-danger alert-dismissible" role="alert"
-								th:if="${msnError}">
-								<button type="button" class="close" data-dismiss="alert"
-									aria-label="Close">x</button>
-								<h5 th:text="${msnError}">Mensagem</h5>
-							</div>
-							<div class="alert alert-success alert-dismissible" role="alert"
-								th:if="${msnSucess}">
-								<button type="button" class="close" data-dismiss="alert"
-									aria-label="Close">x</button>
-								<h5 th:text="${msnSucess}">Mensagem</h5>
-							</div>
+						<!-- 				INICIO DOS ALERTAS -->
+						<div class="alert alert-danger alert-dismissible" role="alert"
+							th:if="${msnError}">
+							<button type="button" class="close" data-dismiss="alert"
+								aria-label="Close">x</button>
+							<h5 th:text="${msnError}">Mensagem</h5>
+						</div>
+						<div class="alert alert-success alert-dismissible" role="alert"
+							th:if="${msnSucess}">
+							<button type="button" class="close" data-dismiss="alert"
+								aria-label="Close">x</button>
+							<h5 th:text="${msnSucess}">Mensagem</h5>
+						</div>
 						<!-- 					FINAL DOS ALERTAS -->
 						<div class="form-element-list">
 							<div class="cmp-tb-hd bcs-hd">
@@ -124,7 +125,8 @@
 										</div>
 										<div class="nk-int-st">
 											<input type="text" id="logradouro" class="form-control"
-											 placeholder="Logradouro" th:field="*{adress.logradouro}" readonly="readonly" />
+												placeholder="Logradouro" th:field="*{adress.logradouro}"
+												readonly="readonly" />
 										</div>
 									</div>
 								</div>
@@ -135,7 +137,8 @@
 										</div>
 										<div class="nk-int-st">
 											<input type="text" id="localidade" class="form-control"
-											 placeholder="Cidade" th:field="*{adress.localidade}" readonly="readonly" />
+												placeholder="Cidade" th:field="*{adress.localidade}"
+												readonly="readonly" />
 										</div>
 									</div>
 								</div>
@@ -147,8 +150,9 @@
 											<i class="notika-icon notika-next"></i>
 										</div>
 										<div class="nk-int-st">
-											<input type="text" id="bairro" 
-												class="form-control" th:field="*{adress.bairro}" readonly="readonly" placeholder="Bairro" >
+											<input type="text" id="bairro" class="form-control"
+												th:field="*{adress.bairro}" readonly="readonly"
+												placeholder="Bairro">
 										</div>
 									</div>
 								</div>
@@ -159,7 +163,7 @@
 										</div>
 										<div class="nk-int-st">
 											<input type="text" id="uf" class="form-control"
-											 placeholder="UF" th:field="*{adress.uf}" readonly="readonly" />
+												placeholder="UF" th:field="*{adress.uf}" readonly="readonly" />
 										</div>
 									</div>
 								</div>
@@ -170,7 +174,7 @@
 										</div>
 										<div class="nk-int-st">
 											<input type="text" id="complemento" class="form-control"
-											 placeholder="Complemento" th:field="*{adress.complemento}" />
+												placeholder="Complemento" th:field="*{adress.complemento}" />
 										</div>
 									</div>
 								</div>
@@ -195,9 +199,12 @@
 										</div>
 										<div class="bootstrap-select ">
 											<select name="tipoSanguinio" class="selectpicker" required>
-												<option selected th:text="*{tipoSanguinio.descricao}" th:value="*{tipoSanguinio}">One</option>
-												<option th:each="tipoSanguinio : ${T(br.com.anhanguera.caranavirus.enuns.TipoSanguinioEnum).values()}"
-													th:value="${tipoSanguinio}" th:text="${tipoSanguinio.descricao}"></option>
+												<option selected th:text="*{tipoSanguinio.descricao}"
+													th:value="*{tipoSanguinio}">One</option>
+												<option
+													th:each="tipoSanguinio : ${T(br.com.anhanguera.caranavirus.enuns.TipoSanguinioEnum).values()}"
+													th:value="${tipoSanguinio}"
+													th:text="${tipoSanguinio.descricao}"></option>
 											</select>
 										</div>
 									</div>
@@ -257,7 +264,9 @@
 					</div>
 				</div>
 				<div class="modals-single">
-					<form th:object="${newVacina}" th:action="@{add-vacina/{idUser}(idUser = ${userDto.id})}" method="post">
+					<form th:object="${newVacina}"
+						th:action="@{add-vacina/{idUser}(idUser = ${userDto.id})}"
+						method="post">
 						<div class="modals-default-cl">
 							<div class="modal fade" id="myModalone" role="dialog">
 								<div class="modal-dialog modals-default">
@@ -268,50 +277,35 @@
 										<div class="modal-body">
 											<h2>Adicionar vacina</h2>
 											<div class="row">
-												<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-													<div class="form-group ic-cmp-int">
-														<div class="form-ic-cmp"></div>
-														<div class="bootstrap-select ">
-															<select class="selectpicker">
-																<option>Nº Dose</option>
-																<option
-																	th:each=" numeracaoVacina : ${T(br.com.anhanguera.caranavirus.enuns.NumeroDosagemEnum).values()}"
-																	th:value="*{numeracaoDose}"
-																	th:text="${numeracaoVacina.dose}"></option>
-															</select>
-														</div>
+												<div class="col-lg-6 col-md-4 col-sm-4 col-xs-12">
+													<div class="bootstrap-select ">
+														<select class="selectpicker" th:field="*{marcaVacina}"
+															required="required" id="nomeVacina" >
+															<option value="">Marca vacina</option>
+															<option
+																th:each=" nomeVacinaEnum : ${T(br.com.anhanguera.caranavirus.enuns.NomeVacinaEnum).values()}"
+																th:value="${nomeVacinaEnum}"
+																th:text="${nomeVacinaEnum.nomeVacina}"
+																selected="selected"></option>
+														</select>
 													</div>
 												</div>
-												<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-													<div class="form-group ic-cmp-int">
-														<div class="bootstrap-select ">
-															<select class="selectpicker" th:field="*{marcaVacina}"
-																required>
-																<option value="">Marca vacina</option>
-																<option
-																	th:each=" nomeVacinaEnum : ${T(br.com.anhanguera.caranavirus.enuns.NomeVacinaEnum).values()}"
-																	th:value="${nomeVacinaEnum}"
-																	th:text="${nomeVacinaEnum.nomeVacina}"
-																	selected="selected"></option>
-															</select>
-														</div>
-													</div>
-												</div>
-												<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+												<div class="col-lg-6 col-md-4 col-sm-4 col-xs-12">
 													<div class="form-group nk-datapk-ctm form-elet-mg"
 														id="data_2">
 														<div class="input-group date nk-int-st">
 															<span class="input-group-addon"></span> <input
 																type="text" class="form-control"
-																placeholder="Data aplicação" th:field="*{dataAplicacao}">
+																placeholder="Data aplicação" th:field="*{dataAplicacao}" required="required" id="dataVacina"/>
 														</div>
 													</div>
 												</div>
 											</div>
 										</div>
+										<br />
 										<div class="modal-footer">
-											<button type="submit" class="btn btn-default" >Adicionar</button>
-											<button type="reset" class="btn btn-default" >Cancelar</button>
+											<button type="submit" class="btn btn-default" id="addVacinaButton">Adicionar</button>
+											<button type="reset" class="btn btn-default">Cancelar</button>
 										</div>
 									</div>
 								</div>
@@ -336,7 +330,8 @@
 														<i class="notika-icon notika-next"></i>
 													</div>
 													<div class="nk-int-st">
-														<input type="text" class="form-control" id="numeracaoDoseVisualizacao" readonly="readonly"/>
+														<input type="text" class="form-control"
+															id="numeracaoDoseVisualizacao" readonly="readonly" />
 													</div>
 												</div>
 											</div>
@@ -346,8 +341,8 @@
 														<i class="notika-icon notika-next"></i>
 													</div>
 													<div class="nk-int-st">
-														<input type="text" class="form-control" id="marcaVacinaVisualizacao"
-															readonly="readonly" />
+														<input type="text" class="form-control"
+															id="marcaVacinaVisualizacao" readonly="readonly" />
 													</div>
 												</div>
 											</div>
@@ -462,6 +457,7 @@
 	<script type="text/javascript">
 		
 	   window.onload = function () {
+		   $("#addVacinaButton").prop("disabled", true);
 // 		   buscarCep();
 		    }
 	
@@ -486,6 +482,21 @@
     		   }).catch(error => {
     		   })			
     	}
+    	
+    	$(document).ready(function (){
+    	    validate();
+    	    $('#nomeVacina, #dataVacina').change(validate);
+    	});
+
+    	function validate(){
+    	    if ($('#nomeVacina').val().length > 0 && $('#dataVacina').val().length > 0 ) {
+    	        $("#addVacinaButton").prop("disabled", false);
+    	    }
+    	    else {
+    	        $("#addVacinaButton").prop("disabled", true);
+    	    }
+    	}
+    	
     </script>
 
 
