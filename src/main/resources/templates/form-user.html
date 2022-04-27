@@ -348,8 +348,17 @@
 					if(!cep2){
 						document.getElementById('endereco').value = "";
 					}
+					
+					$("#logradouro").prop("readonly", true);
+					$("#localidade").prop("readonly", true);
+					$("#bairro").prop("readonly", true);
+					$("#uf").prop("readonly", true);
 			   }).catch(error => {    			   
 						document.getElementById('endereco').value = "";
+						$("#logradouro").prop("readonly", false);
+						$("#localidade").prop("readonly", false);
+						$("#bairro").prop("readonly", false);
+						$("#uf").prop("readonly", false);
 			   })			
 		}
 	   	
