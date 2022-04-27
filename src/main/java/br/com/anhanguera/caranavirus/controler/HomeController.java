@@ -72,9 +72,15 @@ public class HomeController {
 		
 		if (userDto.getAdress().getBairro() == "" && userDto.getAdress().getLocalidade() == ""
 				&& userDto.getAdress().getLogradouro() == "" && userDto.getAdress().getUf() == "") {
-			
-//			Adress adress = cepService.getEndereco(userDto.getAdress().getNumeroCEP().replace("-", ""));
 			Adress adress = null;
+			
+			try {
+				adress = cepService.getEndereco(userDto.getAdress().getNumeroCEP().replace("-", ""));				
+			}catch (Exception e) {
+				mensagem = "Houve um erro ao tentar buscar o endereço do cep informado, favor consulte o Administrador do sistema - codigo error: " + e.getMessage();
+				attributes.addFlashAttribute("msnError", mensagem);
+				return "redirect:/";
+			}
 			
 			if(adress == null) {
 				adress = new Adress(userDto.getAdress().getNumeroCEP(), "Indefinido", "Indefinido", "Indefinido", "Indefinido", "Indefinido"); 
