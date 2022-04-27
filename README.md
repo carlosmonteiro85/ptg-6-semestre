@@ -56,11 +56,11 @@ Após clicar no botão referente a pessoa na tela de todas pessoas, é carregado
 </p>
 <p float="left">
 	Adicionando nova vacina que a pessoa está recebendo.
-  <img src="static-files/verificar-vacina.png" width="1020" />
+  <img src="static-files/adcionando-nova-vacina.png" width="1020" />
 </p>
 <p float="left">
 	A vacina que já foi recebida pode ser verificada pelo lupa, na lista de vacinas a baixo do cadastro da pessoa recebendo.
-  <img src="static-files/adcionando-nova-vacina.png" width="1020" />
+    <img src="static-files/verificar-vacina.png" width="1020" />
 </p>
 
 ### Adicionando nova pessoa no sistema.
