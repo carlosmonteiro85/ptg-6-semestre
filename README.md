@@ -111,7 +111,7 @@ Após o projeto receber o build, é iniciado o H2, que é encontrado através do
 * Coronavac: 28 dias após a primeira dose
 * Pfizer: oito semanas após a primeira dose
 * AstraZeneca: 12 semanas após a primeira dose
-* Sputinik: era recomendado um prazo de 21 dias após a primeira dose, agora deve ser aplicada apos 3 meses apos a aplicação da primeira dose
+* Sputinik: era recomendado um prazo de 21 dias após a primeira dose, agora deve ser aplicada 3 meses após a aplicação da primeira dose
 * Covaxin: A segunda dose deve ser aplicada 28 dias após a primeira. *Suspensa temporariamente*
 
 ### Dose de reforço
