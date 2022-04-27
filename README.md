@@ -99,14 +99,14 @@ Após o projeto receber o build, é iniciado o H2, que é encontrado através do
 
 ## Algumas Regras de negócio aplicada no projeto
 
-###Segunda dose
+### Segunda dose
 * Coronavac: 28 dias após a primeira dose
 * Pfizer: oito semanas após a primeira dose
 * AstraZeneca: 12 semanas após a primeira dose
 * Sputinik: era recomendado um prazo de 21 dias após a primeira dose, agora deve ser aplicada apos 3 meses apos a aplicação da primeira dose
 * Covaxin: A segunda dose deve ser aplicada 28 dias após a primeira. *Suspensa temporariamente*
 
-###Dose de reforço
+### Dose de reforço
 * Janssen: dois meses após a primeira dose
 * Coronavac: quatro meses após a segunda dose
 * Pfizer: quatro meses após a segunda dose
@@ -116,7 +116,7 @@ Após o projeto receber o build, é iniciado o H2, que é encontrado através do
 * COVAXIN : está suspensa e não é permitida a utilização por enquanto
 
 
-### fontes 
+### fontes para regra de negócio
 * https://www.joinville.sc.gov.br/noticias/qual-o-intervalo-entre-as-doses-das-vacinas-contra-a-covid-19/
 * https://oglobo.globo.com/saude/intervalo-entre-doses-da-sputnik-pode-ser-estendido-ate-tres-meses-diz-fabricante-24987647
 * https://www.gov.br/anvisa/pt-br/assuntos/paf/coronavirus/vacinas/covaxin#:~:text=Quantidade%20de%20doses%20para%20imuniza%C3%A7%C3%A3o,18%20anos%20e%20%3C%2060%20anos.
