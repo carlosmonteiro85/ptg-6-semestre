@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.anhanguera.caranavirus.dto.UserDto;
+import br.com.anhanguera.caranavirus.entity.Adress;
 import br.com.anhanguera.caranavirus.entity.User;
 import br.com.anhanguera.caranavirus.entity.Vacina;
+import br.com.anhanguera.caranavirus.service.CEPService;
 import br.com.anhanguera.caranavirus.service.UserService;
 import br.com.anhanguera.caranavirus.service.VacinaService;
 
@@ -27,6 +29,9 @@ public class HomeController {
 
 	@Autowired
 	UserService service;
+	
+	@Autowired
+	CEPService cepService;
 	
 	@Autowired
 	VacinaService vacinaService;
@@ -64,6 +69,19 @@ public class HomeController {
 			attributes.addFlashAttribute("msnError", mensagem);
 			return "redirect:/form-user";
 		}
+		
+		if (userDto.getAdress().getBairro() == "" && userDto.getAdress().getLocalidade() == ""
+				&& userDto.getAdress().getLogradouro() == "" && userDto.getAdress().getUf() == "") {
+			
+//			Adress adress = cepService.getEndereco(userDto.getAdress().getNumeroCEP().replace("-", ""));
+			Adress adress = null;
+			
+			if(adress == null) {
+				adress = new Adress(userDto.getAdress().getNumeroCEP(), "Indefinido", "Indefinido", "Indefinido", "Indefinido", "Indefinido"); 
+				attributes.addFlashAttribute("msnWarning", "Infelizmente não foi possivel completar o endereço de "+ userDto.getName() +", pedimos por gentileza que tente redefini-lo mais tarde");
+			}
+			userDto.setAdress(adress);
+		}
 
 		try {
 			User user = userDto.userDTOToUser();
@@ -73,7 +91,7 @@ public class HomeController {
 		} catch (Exception e) {
 			mensagem = "Houve o seguinte erro ao tentar salvar o usuario " + e.getMessage();
 			attributes.addFlashAttribute("msnError", mensagem);
-			return "redirect:/form-user";
+			return "redirect:/";
 		}
 		return "redirect:/";
 	}
@@ -117,7 +135,7 @@ public class HomeController {
 		} catch (Exception e) {
 			mensagem = "Houve um erro ao reculperar o cadastro do usuario ";
 			attributes.addFlashAttribute("msnError", mensagem);
-			return "redirect:/";
+			return "redirect:/all-users";
 		}
 		return "redirect:/profile?id="+ id.toString();			
 	}
