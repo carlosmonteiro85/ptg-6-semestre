@@ -4626,6 +4626,9 @@ body.box-layout {
 	position: relative;
     top: 2px;
 }
+	.rodape{
+		margin-top: 230px !important;
+	}
 /*----------------------------------------*/
 /*  59. Notika custom scrollbar CSS
 /*----------------------------------------*/
