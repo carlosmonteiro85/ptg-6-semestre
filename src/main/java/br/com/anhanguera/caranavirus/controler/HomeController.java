@@ -75,7 +75,7 @@ public class HomeController {
 			Adress adress = null;
 			
 			try {
-				adress = cepService.getEndereco(userDto.getAdress().getNumeroCEP().replace("-", ""));				
+				adress = cepService.getEndereco(userDto.getAdress().getNumeroCEP().replace("-", "").replace(" ", ""));				
 			}catch (Exception e) {
 				mensagem = "Houve um erro ao tentar buscar o endereço do cep informado, favor consulte o Administrador do sistema - codigo error: " + e.getMessage();
 				attributes.addFlashAttribute("msnError", mensagem);
